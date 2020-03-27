@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:dio/dio.dart';
-import 'package:fluttermvvmframe/utils/log_util.dart';
+import 'package:flutter_mvvm_frame/utils/log_util.dart';
 
 
 class LogsInterceptors extends InterceptorsWrapper {

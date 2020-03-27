@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttermvvmframe/module/view/home.dart';
+import 'package:flutter_mvvm_frame/module/view/home.dart';
 
 final routes = <String, WidgetBuilder>{ //泛型参数用来规范json中键值对的类型
   //DetailPage0.route: (context,{args = '默认标题'}) => DetailPage0(args: args),

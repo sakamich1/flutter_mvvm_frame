@@ -1,4 +1,4 @@
-import 'package:fluttermvvmframe/base/base.dart';
+import 'package:flutter_mvvm_frame/base/base.dart';
 
 class ScreenManager {
   List<String> _screenStack = List<String>();

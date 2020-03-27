@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_toast/easy_toast.dart';
-import 'package:fluttermvvmframe/common/constants.dart';
+import 'package:flutter_mvvm_frame/common/constants.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'http_result.dart';

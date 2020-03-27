@@ -1,4 +1,4 @@
-# fluttermvvmframe
+# flutter_mvvm_frame
 
 Flutter fast-developing frame with MVVM mode
 

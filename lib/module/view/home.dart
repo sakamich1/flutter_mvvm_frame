@@ -1,8 +1,8 @@
 import 'package:easy_toast/easy_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:fluttermvvmframe/base/base.dart';
-import 'package:fluttermvvmframe/utils/extensions.dart';
+import 'package:flutter_mvvm_frame/base/base.dart';
+import 'package:flutter_mvvm_frame/utils/extensions.dart';
 
 class HomeScreen extends BaseScreen {
   static final route = '/';

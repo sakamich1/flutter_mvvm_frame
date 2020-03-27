@@ -1,13 +1,12 @@
 import 'package:dartin/dartin.dart';
-import 'package:fluttermvvmframe/module/model/home_repository.dart';
-import 'package:fluttermvvmframe/module/model/home_service.dart';
-import 'package:fluttermvvmframe/module/viewmodel/home_vm.dart';
-import 'package:fluttermvvmframe/utils/sp_utils.dart';
+import 'package:flutter_mvvm_frame/module/model/home_repository.dart';
+import 'package:flutter_mvvm_frame/module/model/home_service.dart';
+import 'package:flutter_mvvm_frame/module/viewmodel/home_vm.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const scope = DartInScope('global');
 final modules = [viewModelModule,repoModule,remoteModule,localModule];
-SPUtil sp;
+SharedPreferences sp;
 
 final viewModelModule = Module([
   factory<HomeVM>(({params}) => HomeVM(get<HomeRepository>())),
@@ -24,11 +23,11 @@ final remoteModule = Module([
 ]);
 
 final localModule = Module([
-  single<SPUtil>(({params}) => sp)
+  single<SharedPreferences>(({params}) => sp)
 ]);
 
 init() async {
-  sp = await SPUtil.getInstance();
+  sp = await SharedPreferences.getInstance();
   // DartIn start
   startDartIn(modules);
 }

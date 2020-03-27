@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:dartin/dartin.dart';
 import 'package:easy_toast/const.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:fluttermvvmframe/global/screen_manager.dart';
-import 'package:fluttermvvmframe/utils/log_util.dart';
-import 'package:fluttermvvmframe/utils/ui_utils.dart';
+import 'package:flutter_mvvm_frame/global/screen_manager.dart';
+import 'package:flutter_mvvm_frame/utils/log_util.dart';
+import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:provider/provider.dart';
 
