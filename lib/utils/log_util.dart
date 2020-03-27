@@ -4,19 +4,19 @@ class LogUtil {
 
   static void e(Object object,{String tag}) {
     if (!isRelease) {
-      _printLog(tag,'  e  ',object);
+      _printLog(tag,'/Error : ',object);
     }
   }
 
   static void v(Object object,{String tag}) {
     if (!isRelease) {
-      _printLog(tag,'  v  ',object);
+      _printLog(tag,'/Verbose : ',object);
     }
   }
 
   static void _printLog(String tag,String stag,Object object) {
     StringBuffer sb = new StringBuffer()
       ..write(tag)..write(stag)..write(object);
-    LogUtil.v(sb.toString());
+    print(sb.toString());
   }
 }
