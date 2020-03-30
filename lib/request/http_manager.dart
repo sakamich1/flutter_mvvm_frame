@@ -33,14 +33,11 @@ class HttpManager {
   }
 
   static HttpManager _getInstance() {
-    if (instance == null) {
+    if (_instance == null) {
       _instance = HttpManager._internal();
     }
     return _instance;
   }
-
-  Stream<HttpResult> get(String url,{Map<String, dynamic> params}) =>
-    Stream.fromFuture(_rawGet(url,params: params));
 
   /*.asBroadcastStream();*/
 
@@ -56,10 +53,6 @@ class HttpManager {
   }
 
 
-  Stream<HttpResult> post(String url,{dynamic data,Map<String,
-    dynamic> queryParameters}) =>
-    Stream.fromFuture(_rawPost(url,data,queryParameters: queryParameters));
-
 //.asBroadcastStream();
 
   Future<HttpResult> _rawPost(String url,
@@ -74,4 +67,11 @@ class HttpManager {
     return res;
   }
 }
+
+Stream<HttpResult> get(String url,{Map<String, dynamic> params}) =>
+  Stream.fromFuture(HttpManager.instance._rawGet(url,params: params));
+
+Stream<HttpResult> post(String url,{dynamic data,Map<String,
+  dynamic> queryParameters}) =>
+  Stream.fromFuture(HttpManager.instance._rawPost(url,data,queryParameters: queryParameters));
 

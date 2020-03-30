@@ -42,6 +42,9 @@ abstract class BaseState<T extends BaseScreen,P extends BaseProvider> //不用VM
   List<StreamSubscription> subscriptions = List();
   P mProvider;
 
+
+  BaseState() :mProvider=inject<P>();
+
   @override
   bool get wantKeepAlive => false;
 
@@ -63,7 +66,9 @@ abstract class BaseState<T extends BaseScreen,P extends BaseProvider> //不用VM
     }
     //executeAfterBuild();
     return ChangeNotifierProvider<P>(
-      create: (context) => mProvider = inject<P>(), ///在此注入VM
+      create: (context) => mProvider,
+
+      ///在此注入VM
       child: getWidget(context),
     );
   }

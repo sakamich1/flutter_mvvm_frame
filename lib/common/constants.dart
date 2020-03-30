@@ -25,6 +25,7 @@ class API {
 class Strings {
 }
 
+///示例：必须加入alpha
 class Iro {
   ///gray
   static const int gray1 = 0xff333333;
