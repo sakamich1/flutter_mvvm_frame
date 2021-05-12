@@ -1,4 +1,3 @@
-import 'package:easy_toast/easy_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mvvm_frame/base/base.dart';
@@ -22,7 +21,6 @@ class _HomeState extends BaseState<HomeScreen,BaseProvider> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.calendar_today),
-            onPressed: () => toast('DO NOT FUCKING PRESS ME'),
           ),
         ],
       ),

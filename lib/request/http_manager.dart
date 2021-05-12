@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:easy_toast/easy_toast.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -47,7 +46,7 @@ class HttpManager {
       queryParameters: params);
     HttpResult res = HttpResult.fromJson(response.data);
     if (res.code != 1) {
-      toast(res.msg);
+      //toast(res.msg);
     }
     return res;
   }
@@ -62,7 +61,7 @@ class HttpManager {
       url,data: data,queryParameters: queryParameters);
     var res = HttpResult.fromJson(response.data);
     if (res.code != 1) {
-      toast(res.msg);
+      //toast(res.msg);
     }
     return res;
   }

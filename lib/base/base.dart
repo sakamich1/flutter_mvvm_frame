@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:dartin/dartin.dart';
-import 'package:easy_toast/const.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_frame/global/screen_manager.dart';
 import 'package:flutter_mvvm_frame/utils/log_util.dart';
 import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
+import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:provider/provider.dart';
 
@@ -34,16 +33,17 @@ abstract class BaseScreen extends StatefulWidget {
   BaseState getState();
 }
 
-abstract class BaseState<T extends BaseScreen,P extends BaseProvider> //不用VM可传入BaseProvider
-  extends State<T>
-  with WidgetsBindingObserver, BaseTools, AutomaticKeepAliveClientMixin {
+//不用VM可传入BaseProvider
+abstract class BaseState<T extends BaseScreen, P extends BaseProvider>
+    extends State<T>
+    with WidgetsBindingObserver, BaseTools, AutomaticKeepAliveClientMixin {
   bool _isResumed = false;
   bool _isPaused = false;
-  List<StreamSubscription> subscriptions = List();
+  List<StreamSubscription> subscriptions = [];
   P mProvider;
 
-
-  BaseState() :mProvider=inject<P>();
+  BaseState()
+    : mProvider = Get.find<P>();
 
   @override
   bool get wantKeepAlive => false;
@@ -51,7 +51,7 @@ abstract class BaseState<T extends BaseScreen,P extends BaseProvider> //不用VM
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    Global.currContext = context;
+    //Global.currContext = context;
 
     if (!UIUtils.initialized) {
       UIUtils.init(context);
@@ -163,25 +163,17 @@ abstract class BaseState<T extends BaseScreen,P extends BaseProvider> //不用VM
 }
 
 abstract class BaseTools {
+  void initView() {}
 
-  void initView() {
-  }
+  void onBuilt() {}
 
-  void onBuilt() {
-  }
+  void onResume() {}
 
-  void onResume() {
-  }
+  void onPause() {}
 
-  void onPause() {
-  }
+  void onDestroy() {}
 
-  void onDestroy() {
-  }
+  void onForeground() {}
 
-  void onForeground() {
-  }
-
-  void onBackground() {
-  }
+  void onBackground() {}
 }

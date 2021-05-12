@@ -169,13 +169,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
-  dartin:
-    dependency: "direct main"
-    description:
-      name: dartin
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.1.5"
   dio:
     dependency: "direct main"
     description:
@@ -183,13 +176,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
-  easy_toast:
-    dependency: "direct main"
-    description:
-      name: easy_toast
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.2.0"
   event_bus:
     dependency: "direct main"
     description:
@@ -247,6 +233,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.4"
   glob:
     dependency: transitive
     description:
@@ -275,13 +268,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
-  intl:
-    dependency: transitive
-    description:
-      name: intl
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.16.1"
   io:
     dependency: transitive
     description:
@@ -436,13 +422,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
-  refreshable_list:
-    dependency: "direct main"
-    description:
-      name: refreshable_list
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.5.3"
   rxdart:
     dependency: "direct main"
     description:
@@ -498,7 +477,7 @@ packages:
       name: shelf
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.1"
+    version: "1.1.2"
   shelf_web_socket:
     dependency: transitive
     description:

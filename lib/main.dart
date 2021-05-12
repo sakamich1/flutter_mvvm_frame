@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mvvm_frame/global/dependencies_module.dart';
 import 'package:flutter_mvvm_frame/module/view/home.dart';
+import 'package:get/get.dart';
+import 'global/dependencies_module.dart';
 import 'global/routes.dart';
 
 void main() async {

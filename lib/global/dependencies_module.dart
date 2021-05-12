@@ -1,13 +1,12 @@
-import 'package:dartin/dartin.dart';
+import 'package:flutter_mvvm_frame/base/base.dart';
 import 'package:flutter_mvvm_frame/module/model/home_repository.dart';
 import 'package:flutter_mvvm_frame/module/model/home_service.dart';
 import 'package:flutter_mvvm_frame/module/viewmodel/home_vm.dart';
 import 'package:flutter_mvvm_frame/utils/sp_utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
 
-const scope = DartInScope('global');
+/*const scope = DartInScope('global');
 final modules = [viewModelModule,repoModule,remoteModule,localModule];
-SPUtil sp;
 
 final viewModelModule = Module([
   factory<HomeVM>(({params}) => HomeVM(get<HomeRepository>())),
@@ -25,11 +24,21 @@ final remoteModule = Module([
 
 final localModule = Module([
   single<SPUtil>(({params}) => sp)
-]);
+]);*/
+//SPUtil sp;
 
 init() async {
-  sp = await SPUtil.getInstance();
-  // DartIn start
-  startDartIn(modules);
-}
+  Get.putAsync<SPUtil>(() async {
+    final sp = await SPUtil.getInstance();
+    return sp;
+  });
+  
+  
+  Get.put<BaseProvider>(BaseProvider());
+  Get.put<HomeService>(HomeService());
+  Get.put<HomeRepository>(HomeRepository(Get.find<HomeService>()));
+  Get.put<HomeVM>(HomeVM(Get.find<HomeRepository>()));
 
+  // DartIn start
+  //startDartIn(modules);
+}

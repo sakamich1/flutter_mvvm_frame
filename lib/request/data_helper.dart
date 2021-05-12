@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:convert/convert.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/global/dependencies_module.dart';
 import 'package:flutter_mvvm_frame/utils/log_util.dart';
 
 
@@ -11,9 +10,9 @@ class DataHelper {
 
   static SplayTreeMap getPublicParams() {
     var map = SplayTreeMap<String, dynamic>();
-    map["token"] = sp.getString("token");
-    map["user_id"] = sp.getString("user_id");
-    map["channelroad"] = "";
+    //map["token"] = sp.getString("token");
+    //map["user_id"] = sp.getString("user_id");
+    //map["channelroad"] = "";
 
     return map;
   }

@@ -23,14 +23,14 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
-  refreshable_list: ^0.5.3
-  easy_toast: ^0.2.0
+  #refreshable_list: ^0.5.3
+  #easy_toast: ^0.2.0
   provider: ^5.0.0
   dio: ^4.0.0
   shared_preferences: ^2.0.5
   event_bus: ^2.0.0
   rxdart: ^0.26.0
-  dartin: ^0.1.5
+  get:
 
 dev_dependencies:
   flutter_test:
