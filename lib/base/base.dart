@@ -92,7 +92,7 @@ abstract class BaseState<T extends BaseScreen, P extends BaseProvider>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); //监听state生命周期
+    WidgetsBinding.instance!.addObserver(this); //监听state生命周期
     ScreenManager().addWidget(this);
     initView();
   }
@@ -147,7 +147,7 @@ abstract class BaseState<T extends BaseScreen, P extends BaseProvider>
     _isPaused = false;
     _isResumed = false;
     onDestroy();
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     ScreenManager().removeWidget(this);
     //取消订阅
     if (subscriptions.isNotEmpty) {

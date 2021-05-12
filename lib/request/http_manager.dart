@@ -6,14 +6,14 @@ import 'http_result.dart';
 import 'interceptors.dart';
 
 class HttpManager {
-  static HttpManager _instance;
+  static HttpManager? _instance;
 
-  static HttpManager get instance => _getInstance();
+  static HttpManager? get instance => _getInstance();
 
-  Dio dio;
-  BaseOptions options;
+  late Dio dio;
+  BaseOptions? options;
 
-  factory HttpManager()=> _getInstance();
+  factory HttpManager()=> _getInstance()!;
 
   HttpManager._internal(){
     dio = Dio()
@@ -31,7 +31,7 @@ class HttpManager {
       );
   }
 
-  static HttpManager _getInstance() {
+  static HttpManager? _getInstance() {
     if (_instance == null) {
       _instance = HttpManager._internal();
     }
@@ -40,8 +40,8 @@ class HttpManager {
 
   /*.asBroadcastStream();*/
 
-  Future<HttpResult> _rawGet(String url,{Map<String, dynamic> params}) async {
-    var response = await HttpManager.instance.dio.get(
+  Future<HttpResult> _rawGet(String url,{Map<String, dynamic>? params}) async {
+    var response = await HttpManager.instance!.dio.get(
       url,
       queryParameters: params);
     HttpResult res = HttpResult.fromJson(response.data);
@@ -56,8 +56,8 @@ class HttpManager {
 
   Future<HttpResult> _rawPost(String url,
                               dynamic data,
-                              { Map<String, dynamic> queryParameters}) async {
-    var response = await HttpManager.instance.dio.post(
+                              { Map<String, dynamic>? queryParameters}) async {
+    var response = await HttpManager.instance!.dio.post(
       url,data: data,queryParameters: queryParameters);
     var res = HttpResult.fromJson(response.data);
     if (res.code != 1) {
@@ -67,10 +67,10 @@ class HttpManager {
   }
 }
 
-Stream<HttpResult> get(String url,{Map<String, dynamic> params}) =>
-  Stream.fromFuture(HttpManager.instance._rawGet(url,params: params));
+Stream<HttpResult> get(String url,{Map<String, dynamic>? params}) =>
+  Stream.fromFuture(HttpManager.instance!._rawGet(url,params: params));
 
 Stream<HttpResult> post(String url,{dynamic data,Map<String,
-  dynamic> queryParameters}) =>
-  Stream.fromFuture(HttpManager.instance._rawPost(url,data,queryParameters: queryParameters));
+  dynamic>? queryParameters}) =>
+  Stream.fromFuture(HttpManager.instance!._rawPost(url,data,queryParameters: queryParameters));
 

@@ -3,13 +3,13 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
 class UIUtils {
-  static MediaQueryData _mediaQueryData;
-  static double screenWidth;
-  static double screenHeight;
-  static double pixelRatio;
-  static double statusBarHeight;
-  static double bottomBarHeight;
-  static double textScaleFactor;
+  static late MediaQueryData _mediaQueryData;
+  static double? screenWidth;
+  static double? screenHeight;
+  static double? pixelRatio;
+  static double? statusBarHeight;
+  static double? bottomBarHeight;
+  static late double textScaleFactor;
   static bool initialized = false;
 
   static void init(BuildContext context) {

@@ -4,18 +4,18 @@ import 'package:event_bus/event_bus.dart';
 import 'package:flutter_mvvm_frame/common/event_data.dart';
 
 class EventHelper<T> {
-  static EventHelper _instance;
+  static EventHelper? _instance;
 
-  static EventHelper get instance => _getInstance();
-  EventBus eventBus;
+  static EventHelper? get instance => _getInstance();
+  late EventBus eventBus;
 
   EventHelper._internal(){
     eventBus = EventBus();
   }
 
-  factory EventHelper()=> _getInstance();
+  factory EventHelper()=> _getInstance() as EventHelper<T>;
 
-  static EventHelper _getInstance() {
+  static EventHelper? _getInstance() {
     if (_instance == null) {
       _instance = EventHelper._internal();
     }

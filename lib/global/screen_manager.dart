@@ -1,7 +1,7 @@
 import 'package:flutter_mvvm_frame/base/base.dart';
 
 class ScreenManager {
-  List<String> _screenStack = List<String>();
+  List<String> _screenStack = <String>[];
 
   ScreenManager._internal();
 
@@ -19,9 +19,7 @@ class ScreenManager {
   }
 
   bool isTopPage(BaseState state) {
-    if (_screenStack == null) {
-      return false;
-    }
+  
     try {
       return state.getWidgetName() == _screenStack[_screenStack.length - 1];
     } catch (exception) {
@@ -30,9 +28,7 @@ class ScreenManager {
   }
 
   bool isSecondTop(BaseState state) {
-    if (_screenStack == null) {
-      return false;
-    }
+   
     try {
       return state.getWidgetName() == _screenStack[_screenStack.length - 2];
     } catch (exception) {

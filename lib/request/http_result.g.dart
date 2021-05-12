@@ -8,9 +8,9 @@ part of 'http_result.dart';
 
 HttpResult<T> _$HttpResultFromJson<T>(Map<String, dynamic> json) {
   return HttpResult<T>()
-    ..code = json['code'] as int
-    ..msg = json['msg'] as String
-    ..others = json['others'] as String
+    ..code = json['code'] as int?
+    ..msg = json['msg'] as String?
+    ..others = json['others'] as String?
     ..data = json['data'];
 }
 

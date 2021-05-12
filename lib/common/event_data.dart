@@ -6,8 +6,8 @@ class EventData<T> {
               this.others2,
               this.others3});
 
-  int id;
-  String msg;
+  int? id;
+  String? msg;
   T data;
   dynamic others1;
   dynamic others2;

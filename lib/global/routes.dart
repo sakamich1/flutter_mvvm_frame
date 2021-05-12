@@ -8,9 +8,9 @@ final routes = <String, WidgetBuilder>{ //泛型参数用来规范json中键值�
   HomeScreen.route: (context) => HomeScreen(),
 };
 
-Route generateRoute(RouteSettings settings) {
-  final String name = settings.name; //生成路由时会走该方法 获取当前路由名称
-  final Function pageContentBuilder = routes[name]; //根据路由名称拿到路由生成器方法（在json中注册的）
+Route? generateRoute(RouteSettings settings) {
+  final String? name = settings.name; //生成路由时会走该方法 获取当前路由名称
+  final Function? pageContentBuilder = routes[name!]; //根据路由名称拿到路由生成器方法（在json中注册的）
 
   if (pageContentBuilder != null) {
     if (settings.arguments != null) { //有参

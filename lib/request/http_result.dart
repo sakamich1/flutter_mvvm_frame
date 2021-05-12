@@ -4,9 +4,9 @@ part 'http_result.g.dart';
 
 @JsonSerializable()
 class HttpResult<T>{
-  int code;
-  String msg;
-  String others;
+  int? code;
+  String? msg;
+  String? others;
   dynamic data;
   
   HttpResult();

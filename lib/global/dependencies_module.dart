@@ -28,7 +28,7 @@ final localModule = Module([
 //SPUtil sp;
 
 init() async {
-  Get.putAsync<SPUtil>(() async {
+  Get.putAsync<SPUtil?>(() async {
     final sp = await SPUtil.getInstance();
     return sp;
   });
