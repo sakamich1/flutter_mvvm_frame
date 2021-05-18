@@ -52,7 +52,7 @@ class SPUtil {
   Future<bool>? putStringList(String key,List<String> value) =>
     _sp?.setStringList(key,value);
 
-  dynamic getDynamic(String key) => _sp?.get(key);
+  Object? getDynamic(String key) => _sp?.get(key);
 
 
   Future<bool>? remove(String key) => _sp?.remove(key);

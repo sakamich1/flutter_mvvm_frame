@@ -9,8 +9,8 @@ class EventData<T> {
   int? id;
   String? msg;
   T data;
-  dynamic others1;
-  dynamic others2;
-  dynamic others3;
+  Object? others1;
+  Object? others2;
+  Object? others3;
 
 }

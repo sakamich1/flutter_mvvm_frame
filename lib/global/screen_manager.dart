@@ -1,4 +1,4 @@
-import 'package:flutter_mvvm_frame/base/base.dart';
+import 'package:get/get.dart';
 
 class ScreenManager {
   List<String> _screenStack = <String>[];
@@ -10,27 +10,27 @@ class ScreenManager {
   //工厂模式
   factory ScreenManager() => _singleton;
 
-  void addWidget(BaseState state) {
-    _screenStack.add(state.getWidgetName());
+  void addScreen(GetxController screen) {
+    _screenStack.add(screen.runtimeType.toString());
   }
 
-  void removeWidget(BaseState state) {
-    _screenStack.remove(state.getWidgetName());
+  void removeScreen(GetxController screen) {
+    _screenStack.remove(screen.runtimeType.toString());
   }
 
-  bool isTopPage(BaseState state) {
+  bool isTopPage(GetxController screen) {
   
     try {
-      return state.getWidgetName() == _screenStack[_screenStack.length - 1];
+      return screen.runtimeType.toString() == _screenStack[_screenStack.length - 1];
     } catch (exception) {
       return false;
     }
   }
 
-  bool isSecondTop(BaseState state) {
+  bool isSecondTop(GetxController screen) {
    
     try {
-      return state.getWidgetName() == _screenStack[_screenStack.length - 2];
+      return screen.runtimeType.toString() == _screenStack[_screenStack.length - 2];
     } catch (exception) {
       return false;
     }

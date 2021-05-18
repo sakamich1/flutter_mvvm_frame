@@ -2,178 +2,67 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mvvm_frame/global/screen_manager.dart';
-import 'package:flutter_mvvm_frame/utils/log_util.dart';
 import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:provider/provider.dart';
 
-///VM基类
-class BaseProvider extends ChangeNotifier {
-  CompositeSubscription compositeSubscription = CompositeSubscription();
 
-  addSubscription(StreamSubscription subscription) {
-    compositeSubscription.add(subscription);
-  }
-
-  @override
-  void dispose() {
-    if (!compositeSubscription.isDisposed) {
-      compositeSubscription.dispose();
-    }
-    super.dispose();
-  }
-}
-
-///V基类
-abstract class BaseScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => getState();
-
-  BaseState getState();
-}
-
-//不用VM可传入BaseProvider
-abstract class BaseState<T extends BaseScreen, P extends BaseProvider>
-    extends State<T>
-    with WidgetsBindingObserver, BaseTools, AutomaticKeepAliveClientMixin {
-  bool _isResumed = false;
-  bool _isPaused = false;
-  List<StreamSubscription> subscriptions = [];
-  P mProvider;
-
-  BaseState()
-    : mProvider = Get.find<P>();
-
-  @override
-  bool get wantKeepAlive => false;
-
+///V层基类
+abstract class BaseScreen<T> extends GetView<T> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    //Global.currContext = context;
-
     if (!UIUtils.initialized) {
       UIUtils.init(context);
     }
-
-    if (!_isResumed) {
-      //说明是 初次加载
-      if (ScreenManager().isTopPage(this)) {
-        _isResumed = true;
-        onResume();
-      }
-    }
-    //executeAfterBuild();
-    return ChangeNotifierProvider<P>(
-      create: (context) => mProvider,
-
-      ///在此注入VM
-      child: getWidget(context),
-    );
-  }
-
-  Future<void> executeAfterBuild() async {
-    onBuilt();
+    return getWidget(context);
   }
 
   Widget getWidget(BuildContext context);
-
-  String getWidgetName() {
-    if (this.widget != null) {
-      return this.widget.toString();
-    } else {
-      return "";
-    }
-  }
-
-  //===================================生命周期处理===================================
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addObserver(this); //监听state生命周期
-    ScreenManager().addWidget(this);
-    initView();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
-    //LogUtil.v('didChangeAppLifecycleState ->${getWidgetName()}');
-    switch (state) {
-      case AppLifecycleState.resumed:
-        if (ScreenManager().isTopPage(this)) {
-          onForeground();
-          onResume();
-        }
-        break;
-      case AppLifecycleState.paused:
-        if (ScreenManager().isTopPage(this)) {
-          onBackground();
-          onPause();
-        }
-        break;
-      case AppLifecycleState.inactive:
-        break;
-      case AppLifecycleState.detached:
-        break;
-    }
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-    if (ScreenManager().isSecondTop(this)) {
-      LogUtil.v('${getWidgetName()} is on second top');
-      if (!_isPaused) {
-        onPause();
-        _isPaused = true;
-      } else {
-        onResume();
-        _isPaused = false;
-      }
-    } else if (ScreenManager().isTopPage(this)) {
-      LogUtil.v('${getWidgetName()} is on top');
-      if (!_isPaused) {
-        onPause();
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _isPaused = false;
-    _isResumed = false;
-    onDestroy();
-    WidgetsBinding.instance!.removeObserver(this);
-    ScreenManager().removeWidget(this);
-    //取消订阅
-    if (subscriptions.isNotEmpty) {
-      subscriptions.forEach((subscription) {
-        subscription.cancel();
-        subscriptions.clear();
-      });
-    }
-  }
-
-//================================子类工具方法===================================
-
 }
 
-abstract class BaseTools {
-  void initView() {}
+///GetXController基类
+abstract class BaseController extends FullLifeCycleController
+    with FullLifeCycle {
+  CompositeSubscription compositeSubscription = CompositeSubscription();
 
-  void onBuilt() {}
+  void addSubscription(StreamSubscription subscription) {
+    compositeSubscription.add(subscription);
+  }
 
-  void onResume() {}
+  
+  @override
+  void onInit() {
+    ScreenManager().addScreen(this);
+    super.onInit();
+  }
 
-  void onPause() {}
+  @override
+  void onClose() {
+    ScreenManager().addScreen(this);
+    if (!compositeSubscription.isDisposed) {
+      compositeSubscription.dispose();
+    }
+    super.onClose();
+  }
 
-  void onDestroy() {}
+  @override
+  void onReady() {}
 
-  void onForeground() {}
+  @override
+  void onDetached() {
+  }
 
-  void onBackground() {}
+  @override
+  void onInactive() {
+  }
+
+  @override
+  void onPaused() {
+  }
+
+  @override
+  void onResumed() {
+  }
 }
+
+

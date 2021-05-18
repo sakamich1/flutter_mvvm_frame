@@ -15,6 +15,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.5.0"
+  analyzer_plugin_fork:
+    dependency: transitive
+    description:
+      name: analyzer_plugin_fork
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.5.1"
   args:
     dependency: transitive
     description:
@@ -324,6 +331,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  moor:
+    dependency: "direct main"
+    description:
+      name: moor
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.0"
+  moor_generator:
+    dependency: "direct dev"
+    description:
+      name: moor_generator
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.3.0"
   nested:
     dependency: transitive
     description:
@@ -339,16 +360,30 @@ packages:
     source: hosted
     version: "2.0.0"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0"
+  path_provider:
+    dependency: "direct main"
+    description:
+      name: path_provider
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   path_provider_linux:
     dependency: transitive
     description:
       name: path_provider_linux
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
+  path_provider_macos:
+    dependency: transitive
+    description:
+      name: path_provider_macos
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.0"
@@ -422,6 +457,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.0.0"
   rxdart:
     dependency: "direct main"
     description:
@@ -504,6 +546,27 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
+  sqlite3_flutter_libs:
+    dependency: "direct main"
+    description:
+      name: sqlite3_flutter_libs
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.2"
+  sqlparser:
+    dependency: transitive
+    description:
+      name: sqlparser
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.16.0"
   stack_trace:
     dependency: transitive
     description:

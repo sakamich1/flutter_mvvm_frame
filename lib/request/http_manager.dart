@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:rxdart/rxdart.dart';
-
 import 'http_result.dart';
 import 'interceptors.dart';
 
