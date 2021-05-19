@@ -6,4 +6,6 @@ part 'test_dao.g.dart';
 class TestDao extends DatabaseAccessor<TestDatabase> with _$TestDaoMixin{
   TestDao(TestDatabase attachedDatabase) : super(attachedDatabase);
   
+  
+  
 }
