@@ -1,12 +1,14 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'connectivity_request_retrier.dart';
 import 'http_result.dart';
 import 'interceptors.dart';
 
 class HttpManager {
   static HttpManager? _instance;
+
   factory HttpManager.getInstance() => _getInstance();
 
   late Dio? dio;
@@ -27,10 +29,15 @@ class HttpManager {
             queryParameters: {"token": "", "user_id": ""},
             connectTimeout: Configurations.connect_time_out,
             receiveTimeout: Configurations.receive_time_out)
-        ..interceptors.addAll([NetCacheInterceptor(), LogsInterceptors(),RetryOnConnectionChangeInterceptor(requestRetrier: DioConnectivityRequestRetrier(
-          dio: dio!,
-          connectivity: Connectivity(),
-        ))]);
+        ..interceptors.addAll([
+          NetCacheInterceptor(),
+          LogsInterceptors(),
+          RetryOnConnectionChangeInterceptor(
+              requestRetrier: DioConnectivityRequestRetrier(
+            dio: dio!,
+            connectivity: Connectivity(),
+          ))
+        ]);
     }
   }
 
@@ -38,7 +45,7 @@ class HttpManager {
     var response = await dio!.get(url, queryParameters: params);
     HttpResult res = HttpResult.fromJson(response.data);
     if (res.code != 1) {
-      //toast(res.msg);
+      Fluttertoast.showToast(msg: res.msg!);
     }
     return res;
   }
@@ -49,7 +56,7 @@ class HttpManager {
         await dio!.post(url, data: data, queryParameters: queryParameters);
     var res = HttpResult.fromJson(response.data);
     if (res.code != 1) {
-      //toast(res.msg);
+      Fluttertoast.showToast(msg: res.msg!);
     }
     return res;
   }
@@ -60,4 +67,5 @@ Stream<HttpResult> get(String url, {Map<String, dynamic>? params}) =>
 
 Stream<HttpResult> post(String url,
         {dynamic data, Map<String, dynamic>? queryParameters}) =>
-    Stream.fromFuture(HttpManager.getInstance().rawPost(url, data, queryParameters: queryParameters));
+    Stream.fromFuture(HttpManager.getInstance()
+        .rawPost(url, data, queryParameters: queryParameters));

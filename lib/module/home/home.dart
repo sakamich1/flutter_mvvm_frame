@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mvvm_frame/base/base.dart';
 import 'package:get/get.dart';
+import '../../r.g.dart';
 import 'home_controller.dart';
 
 class HomeScreen extends BaseScreen<HomeController> {
@@ -20,6 +21,11 @@ class HomeScreen extends BaseScreen<HomeController> {
               },
             ),
           ],
+        ),
+        body: Container(
+          child: Image(
+            image: R.image.flr_test_jpg_1_jpg(),
+          ),
         ),
       );
 }

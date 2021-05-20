@@ -9,6 +9,7 @@ import 'global/app_theme.dart';
 import 'global/dependencies_module.dart';
 import 'global/routes.dart';
 import 'module/home/home_binding.dart';
+import 'r.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ void main() async {
     SystemUiOverlayStyle systemUiOverlayStyle =
     SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+    R.image.flr_test_jpg_1_jpg();
   }
 }
 
