@@ -3,22 +3,20 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SPUtil {
-  factory SPUtil.getInstance() => _getInstance();
   static SPUtil? _instance;
-  late SharedPreferences? _sp;
+  static SharedPreferences? _sp;
 
-  SPUtil._internal() {
-    _init();
-  }
+  SPUtil._internal();
 
-  Future<void> _init() async {
+  static Future<void> _init() async {
     if (_sp == null) {
       _sp = await SharedPreferences.getInstance();
     }
   }
 
-  static SPUtil _getInstance() {
+  static Future<SPUtil> getInstance() async{
     if (_instance == null) {
+      await _init();
       _instance = SPUtil._internal();
     }
     return _instance!;

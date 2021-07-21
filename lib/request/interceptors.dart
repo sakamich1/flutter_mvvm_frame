@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:collection';
 import 'package:dio/dio.dart';
@@ -7,46 +8,100 @@ import 'package:get/get.dart' as getX;
 import 'cache.dart';
 import 'connectivity_request_retrier.dart';
 import 'exception.dart';
-import 'package:flutter/cupertino.dart';
-
 
 ///日志拦截器，也管理错误信息
-class LogsInterceptors extends InterceptorsWrapper {
+class LogsInterceptor extends InterceptorsWrapper {
+  final tag = 'LogsInterceptor';
+
   @override
   onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) {
-    LogUtil.v("请求baseUrl：${options.baseUrl}");
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) {
     LogUtil.v("请求url：${options.path}");
-    LogUtil.v('请求头: ' + options.headers.toString());
-    if (options.data != null) {
-      LogUtil.v('请求参数: ' + options.data.toString());
+    LogUtil.v('请求头: ${options.headers}', tag: tag);
+    LogUtil.v('请求方法: ${options.method}');
+    if (options.method == "GET") {
+      LogUtil.v('请求参数: ${options.queryParameters}', tag: tag);
+    } else if (options.method == "POST") {
+      if (options.data != null) {
+        LogUtil.v('请求参数: ${options.data}', tag: tag);
+      }
+    }
+
+    return super.onRequest(options, handler);
+  }
+
+  @override
+  onResponse(
+      Response response,
+      ResponseInterceptorHandler handler,
+      ) {
+    var data = response.data;
+    LogUtil.e('返回码: ${response.statusCode}', tag: tag);
+    LogUtil.e('返回内容: ${utf8.decode(GZipCodec().decode(data))}', tag: tag);
+    super.onResponse(response, handler); // continue
+  }
+
+  @override
+  onError(
+      DioError err,
+      ErrorInterceptorHandler handler,
+      ) {
+    // error统一处理
+    AppException appException = AppException.create(err);
+    err.error = appException;
+
+    LogUtil.e('请求异常: ' + err.toString(), tag: tag);
+    LogUtil.e('请求异常信息: ' + (err.response?.toString() ?? ""), tag: tag);
+    return super.onError(err, handler);
+  }
+}
+
+class NoGzipLogInterceptor extends Interceptor {
+  final tag = 'NoGzipLogsInterceptor';
+
+  @override
+  onRequest(
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) {
+    LogUtil.v("请求url：${options.path}");
+    LogUtil.v('请求头: ${options.headers}', tag: tag);
+    LogUtil.v('请求方法: ${options.method}');
+
+    if (options.method == "GET") {
+      LogUtil.v('请求参数: ${options.queryParameters}', tag: tag);
+    } else if (options.method == "POST") {
+      if (options.data != null) {
+        LogUtil.v('请求参数: ${options.data}', tag: tag);
+      }
     }
     return super.onRequest(options, handler);
   }
 
   @override
   onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) {
+      Response response,
+      ResponseInterceptorHandler handler,
+      ) {
     var data = response.data;
-    LogUtil.e('返回内容: ' + data.toString());
-    return super.onResponse(response, handler); // continue
+    LogUtil.e('返回码: ${response.statusCode}', tag: tag);
+    LogUtil.e('返回内容: ${utf8.decode(data)}', tag: tag);
+    super.onResponse(response, handler); // continue
   }
 
   @override
   onError(
-    DioError err,
-    ErrorInterceptorHandler handler,
-  ) {
+      DioError err,
+      ErrorInterceptorHandler handler,
+      ) {
     // error统一处理
     AppException appException = AppException.create(err);
     err.error = appException;
 
-    LogUtil.e('请求异常: ' + err.toString());
-    LogUtil.e('请求异常信息: ' + (err.response?.toString() ?? ""));
+    LogUtil.e('请求异常: ' + err.toString(), tag: tag);
+    LogUtil.e('请求异常信息: ' + (err.response?.toString() ?? ""), tag: tag);
     return super.onError(err, handler);
   }
 }
@@ -59,6 +114,7 @@ class NetCacheInterceptor extends Interceptor {
 
   @override
   onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    super.onRequest(options, handler);
     if (!CACHE_ENABLE) return handler.next(options);
 
     // refresh标记是否是刷新缓存
@@ -118,11 +174,13 @@ class NetCacheInterceptor extends Interceptor {
 
   @override
   onError(DioError err, ErrorInterceptorHandler handler) async {
+    super.onError(err, handler);
     // 错误状态不缓存
   }
 
   @override
   onResponse(Response response, ResponseInterceptorHandler handler) async {
+    super.onResponse(response, handler);
     // 如果启用缓存，将返回结果保存到缓存
     if (CACHE_ENABLE) {
       await _saveCache(response);
@@ -160,7 +218,6 @@ class NetCacheInterceptor extends Interceptor {
   }
 }
 
-
 class RetryOnConnectionChangeInterceptor extends Interceptor {
   final DioConnectivityRequestRetrier requestRetrier;
 
@@ -182,8 +239,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
 
   bool _shouldRetry(DioError err) {
     return err.type == DioErrorType.other &&
-      err.error != null &&
-      err.error is SocketException;
+        err.error != null &&
+        err.error is SocketException;
   }
 }
-

@@ -5,6 +5,6 @@ import 'package:get/get.dart';
 Future<void> init() async {
   await Get.putAsync<SPUtil?>(() => SharedPreferenceService().init());
 
-  Get.put(DBService().init());
+  //Get.put(DBService().init());
   //Get.put<HomeRepository>(HomeRepository(Get.find<HomeService>()));
 }

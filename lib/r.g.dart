@@ -92,12 +92,6 @@ class AssetResource {
 // ignore: camel_case_types
 class _R_Image_AssetResource {
   const _R_Image_AssetResource();
-
-  /// asset: lib/assets/images/flr_test_jpg_1.jpg
-  // ignore: non_constant_identifier_names
-  final flr_test_jpg_1_jpg = const AssetResource(
-      "assets/images/flr_test_jpg_1.jpg",
-      packageName: R.package);
 }
 
 // ignore: camel_case_types
@@ -121,12 +115,6 @@ class _R_Image {
   const _R_Image();
 
   final asset = const _R_Image_AssetResource();
-
-  /// asset: lib/assets/images/flr_test_jpg_1.jpg
-  // ignore: non_constant_identifier_names
-  AssetImage flr_test_jpg_1_jpg() {
-    return AssetImage(asset.flr_test_jpg_1_jpg.keyName);
-  }
 }
 
 /// This `_R_Svg` class is generated and contains references to static svg type image asset resources.

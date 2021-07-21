@@ -21,15 +21,14 @@ abstract class BaseScreen<T> extends GetView<T> {
 }
 
 ///GetXController基类
-abstract class BaseController extends FullLifeCycleController
-    with FullLifeCycle {
+abstract class BaseController extends GetxController{
   CompositeSubscription compositeSubscription = CompositeSubscription();
 
   void addSubscription(StreamSubscription subscription) {
     compositeSubscription.add(subscription);
   }
 
-  
+
   @override
   void onInit() {
     ScreenManager().addScreen(this);
@@ -45,24 +44,7 @@ abstract class BaseController extends FullLifeCycleController
     super.onClose();
   }
 
-  @override
-  void onReady() {}
-
-  @override
-  void onDetached() {
-  }
-
-  @override
-  void onInactive() {
-  }
-
-  @override
-  void onPaused() {
-  }
-
-  @override
-  void onResumed() {
-  }
 }
+
 
 
