@@ -24,6 +24,9 @@ class HttpResult<T> extends Object {
   @JsonKey(name: 'servertime')
   String? serverTime;
 
+  @JsonKey(name:'success')
+  bool success=false;
+
   dynamic data;
 
   HttpResult();
@@ -72,6 +75,10 @@ class HttpResult<T> extends Object {
       result.data = json['data'];
     }else if(json.containsKey('infoFlowList')){
       result.data=json['infoFlowList'];
+    }
+
+    if(json.containsKey('success')){
+      result.success=json['success'];
     }
 
     return result;

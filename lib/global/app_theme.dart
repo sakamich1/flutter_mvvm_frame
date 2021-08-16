@@ -23,6 +23,16 @@ ThemeData get appThemeData => ThemeData(
     scaffoldBackgroundColor: Colors.white,
     accentColor: kPrimaryColor,
     appBarTheme: appBarTheme,
+    brightness: Brightness.light
     /*textTheme: GoogleFonts.poppinsTextTheme()*/);
+
+ThemeData get darkThemeData => ThemeData(
+    primaryColor: kPrimaryColor,
+    primaryColorLight: kPrimaryLightColor,
+    scaffoldBackgroundColor: Colors.white,
+    accentColor: kPrimaryColor,
+    appBarTheme: appBarTheme,
+    brightness: Brightness.dark
+);
 
 AppBarTheme get appBarTheme => AppBarTheme();

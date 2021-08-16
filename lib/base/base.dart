@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mvvm_frame/global/screen_manager.dart';
 import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
 import 'package:get/get.dart';
@@ -9,11 +10,21 @@ import 'package:rxdart/rxdart.dart';
 
 ///V层基类
 abstract class BaseScreen<T> extends GetView<T> {
+  bool get isLockVertical => true;
+
   @override
   Widget build(BuildContext context) {
     if (!UIUtils.initialized) {
       UIUtils.init(context);
     }
+
+    if(isLockVertical){
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp, //只能纵向
+        //DeviceOrientation.portraitDown,//只能纵向
+      ]);
+    }
+    
     return getWidget(context);
   }
 
@@ -21,7 +32,7 @@ abstract class BaseScreen<T> extends GetView<T> {
 }
 
 ///GetXController基类
-abstract class BaseController extends GetxController{
+abstract class BaseController extends SuperController{
   CompositeSubscription compositeSubscription = CompositeSubscription();
 
   void addSubscription(StreamSubscription subscription) {
@@ -43,6 +54,28 @@ abstract class BaseController extends GetxController{
     }
     super.onClose();
   }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void onDetached() {
+  }
+
+  @override
+  void onInactive() {
+  }
+
+  @override
+  void onPaused() {
+  }
+
+  @override
+  void onResumed() {
+  }
+
 
 }
 

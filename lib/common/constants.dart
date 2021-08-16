@@ -20,6 +20,7 @@ class Configurations {
 }
 
 class API {
+  static const String URL_REPORT = '';
 }
 
 class Strings {
@@ -34,7 +35,7 @@ class Strings {
   static const String PROTO_ENCRYPT_KEY = "zmtq";
 }
 
-class Keys{
+class Keys {
   //串号
   static const String COMMON_DEV_NO = 'devNo';
 
@@ -115,25 +116,77 @@ class Keys{
 
   static const String COMMON_KEY_VENDOR = 'vendor';
 
-///========================================== 以上为公共参数key ==========================================
+  ///========================================== 以上为公共参数key ==========================================
+
+  ///apikey 字幕k根据接口不同区分大小写
+  static const String KEY_API_KEY_LOW_CASE = 'apikey';
+  static const String KEY_API_KEY_CAMEL = 'apiKey';
+
+  ///定位系统
+  static const String KEY_LOCATION_SYSTEM = 'locationSystem';
+
+  ///协议码
+  static const String KEY_PROTOCOL_CODE = 'procCode';
+
+  static const String KEY_CITY_CODE = 'cityCode';
+  static const String KEY_CITY_CODE_LOW_CASE = 'citycode';
+  static const String KEY_CITY_CODES = 'cityCodes';
+
+  ///主数据
+  static const String KEY_API_CITY = "city";
+  static const String KEY_API_DISTRICT = "district";
+  static const String KEY_API_PROVINCE = "province";
+  static const String KEY_API_IP = "ip";
+  static const String KEY_API_AOI_NAME = "aoiName";
+  static const String KEY_API_AUTO = "auto";
+  static const String KEY_API_LOGS = "logs";
+
+  ///搜索城市
+  static const String KEY_API_SEARCH_KEY = 'q';
+  static const String KEY_API_SEARCH_LANGUAGE = 'language';
+  
+  ///========================================== 上报接口参数 ==========================================
+
+  static const String REPORT_KEY_EVENT_ID='event';
+
+  static const String REPORT_KEY_OS = 'os';
+
+  static const String REPORT_KEY_OS_VER = 'os_version';
+
+  static const String REPORT_KEY_DEV_NO = 'dev_no';
+
+  static const String REPORT_KEY_MODEL = 'model';
+
+  static const String REPORT_KEY_CHANNEL = 'channel';
+
+  static const String REPORT_KEY_ANDROID_ID = 'androidid';
+
+  static const String REPORT_KEY_APP_ID = 'app_id';
+
+  static const String REPORT_KEY_PACKAGE_NAME = 'pkg';
+
+  static const String REPORT_KEY_NETWORK = 'network';
+
+  static const String REPORT_KEY_LAT = 'latitude';
+
+  static const String REPORT_KEY_LON = 'longitude';
+
+  static const String REPORT_APP_VER='app_ver';
 }
 
-class SPKeys{
+class SPKeys {
   static const String KEY_LOCATION_DATA = 'key_location_data';
-
 }
 
 ///示例：必须加入alpha
 class Iro {
   ///gray
   static const int gray1 = 0xff333333;
-
-  ///gray with alpha
-  static const int gray1t = 0x99080808;
+  static const int color_bg_toast = 0xf2ececec;
 
   ///orange
   static const int orange1 = 0xfff96006;
-  
+
   ///blue
   static const int blue1 = 0xff4a90e2;
 

@@ -1,9 +1,15 @@
 import 'dart:convert';
 import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart';
+import 'package:encrypt/encrypt.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
 
 class EncodeUtil {
+  static final Key _aesKey = Key.fromUtf8('zmtq20210512vpro');
+  static final IV _aesIv = IV.fromUtf8('zmtq20210512vpro');
+  static final Encrypter _encryptor =
+  Encrypter(AES(_aesKey, mode: AESMode.cbc));
+  
   EncodeUtil._();
 
   static String generateMd5(String data) {
@@ -31,4 +37,7 @@ class EncodeUtil {
     }
     return origin;
   }
+
+  static String generateAES(String content) =>
+      _encryptor.encrypt(content, iv: _aesIv).base64;
 }

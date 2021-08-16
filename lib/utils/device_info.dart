@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter_mvvm_frame/common/constants.dart';
 import 'package:flutter_mvvm_frame/module/main/entity/location_entity.dart';
@@ -80,6 +79,54 @@ class DeviceInfoUtil {
         ..[Keys.COMMON_ZM_ID] = '';
     }
     return queryMap;
+  }
+
+  static Future<Map<String, dynamic>> getReportContent() async {
+    Map<String, dynamic> content = Map();
+
+    var packageInfo = await PackageInfo.fromPlatform();
+    Map<String, dynamic>? locationJson =
+    Get.find<SPUtil>().getJSON(SPKeys.KEY_LOCATION_DATA);
+
+    if (locationJson != null) {
+      LocationEntity locationInfo = LocationEntity.fromJson(locationJson);
+      content
+        ..[Keys.REPORT_KEY_LAT] = '${locationInfo.latitude}'
+        ..[Keys.REPORT_KEY_LON] = '${locationInfo.longitude}';
+    }
+
+    content
+      ..[Keys.REPORT_KEY_PACKAGE_NAME] = packageInfo.packageName
+      ..[Keys.REPORT_KEY_NETWORK] = await getNetworkStatus()
+      ..[Keys.REPORT_APP_VER] = packageInfo.version
+      ..[Keys.COMMON_IMEI] = ''
+      ..[Keys.COMMON_OAID] = '';
+
+    if (Platform.isAndroid) {
+      var androidInfo = await getAndroidInfo();
+
+      content
+        ..[Keys.REPORT_KEY_DEV_NO] = androidInfo.androidId
+        ..[Keys.COMMON_BRAND] = androidInfo.brand
+        ..[Keys.REPORT_KEY_MODEL] = androidInfo.model
+        ..[Keys.REPORT_KEY_OS] = 'android'
+        ..[Keys.REPORT_KEY_OS_VER] = androidInfo.version.release
+        ..[Keys.REPORT_KEY_CHANNEL] = Strings.CHANNEL_ID_ANDROID
+        ..[Keys.REPORT_KEY_ANDROID_ID] = androidInfo.androidId
+        ..[Keys.REPORT_KEY_APP_ID] = Strings.APP_ID_ANDROID;
+    } else {
+      var iosInfo = await getIOSDeviceInfo();
+      content
+        ..[Keys.REPORT_KEY_DEV_NO] = iosInfo.identifierForVendor
+        ..[Keys.COMMON_BRAND] = 'apple'
+        ..[Keys.REPORT_KEY_MODEL] = iosInfo.name
+        ..[Keys.REPORT_KEY_OS] = 'ios'
+        ..[Keys.REPORT_KEY_OS_VER] = iosInfo.systemVersion
+        ..[Keys.REPORT_KEY_CHANNEL] = Strings.CHANNEL_ID_IOS
+        ..[Keys.REPORT_KEY_ANDROID_ID] = ''
+        ..[Keys.REPORT_KEY_APP_ID] = Strings.APP_ID_IOS;
+    }
+    return content;
   }
 
   /*Sample:
