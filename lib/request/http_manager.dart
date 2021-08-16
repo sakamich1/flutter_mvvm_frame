@@ -34,8 +34,8 @@ class HttpManager {
     if (_dio == null) {
       _dio = Dio()
         ..options = BaseOptions(
-          //baseUrl: Configurations.base_url,
-          //queryParameters: {},
+            //baseUrl: Configurations.base_url,
+            //queryParameters: {},
             connectTimeout: Configurations.connect_time_out,
             receiveTimeout: Configurations.receive_time_out,
             contentType: Headers.contentEncodingHeader,
@@ -44,9 +44,9 @@ class HttpManager {
     }
     _dio!.interceptors.add(RetryOnConnectionChangeInterceptor(
         requestRetrier: DioConnectivityRequestRetrier(
-          dio: _dio!,
-          connectivity: Connectivity(),
-        )));
+      dio: _dio!,
+      connectivity: Connectivity(),
+    )));
   }
 
   Future<HttpResult> rawGet(String url,
@@ -75,7 +75,7 @@ class HttpManager {
     var response = await _dio!.get(url, queryParameters: queryParams);
     HttpResult res = isGzip
         ? HttpResult.fromJson(
-        json.decode(utf8.decode(GZipCodec().decode(response.data))))
+            json.decode(utf8.decode(GZipCodec().decode(response.data))))
         : HttpResult.fromJson(json.decode(utf8.decode(response.data)));
     if (res.resultCode != '0') {
       Fluttertoast.showToast(msg: res.resultInfo ?? '请求错误');
@@ -104,7 +104,7 @@ class HttpManager {
     }
 
     var response =
-    await _dio!.post(url, data: EncodeUtil.encodeRequestParams(params));
+        await _dio!.post(url, data: EncodeUtil.encodeRequestParams(params));
     var res = HttpResult.fromJson(
         json.decode(utf8.decode(GZipCodec().decode(response.data))));
     if (res.resultCode != '0') {
@@ -115,15 +115,15 @@ class HttpManager {
 
   Future<HttpResult> report(
       String url, Map<String, dynamic>? queryParameters) async {
-
     if (_dio!.interceptors.contains(_logsInterceptor)) {
       _dio!.interceptors.remove(_logsInterceptor);
       _dio!.interceptors.add(_noGzipLogInterceptor);
     }
 
-    var response = await _dio!.post(url, data:EncodeUtil.generateAES(jsonEncode(queryParameters)) ,options: Options(contentType: Headers.jsonContentType ));
-    var res = HttpResult.fromJson(
-        jsonDecode(utf8.decode(response.data)));
+    var response = await _dio!.post(url,
+        data: EncodeUtil.generateAES(jsonEncode(queryParameters)),
+        options: Options(contentType: Headers.jsonContentType));
+    var res = HttpResult.fromJson(jsonDecode(utf8.decode(response.data)));
     if (res.success) {
       if (kDebugMode) {
         UIUtils.showToast(res.resultInfo ?? '请求错误', fontSize: 12.0);
@@ -134,20 +134,21 @@ class HttpManager {
 }
 
 Stream<HttpResult> get(String url,
-    {Map<String, dynamic>? params, bool isGzip = true}) =>
+        {Map<String, dynamic>? params, bool isGzip = true}) =>
     Stream.fromFuture(HttpManager.getInstance()
-        .rawGet(url, queryParams: params, isGzip: isGzip))
+            .rawGet(url, queryParams: params, isGzip: isGzip))
         .asBroadcastStream();
 
 Stream<HttpResult> post(String url,
     {dynamic data, Map<String, dynamic>? queryParameters, bool isGzip = true}) {
   return Stream.fromFuture(HttpManager.getInstance()
-      .rawPost(url, data, queryParameters: queryParameters, isGzip: isGzip))
+          .rawPost(url, data, queryParameters: queryParameters, isGzip: isGzip))
       .asBroadcastStream();
 }
 
 Stream<HttpResult> sendReport(
     String url, Map<String, dynamic>? queryParameters) {
   return Stream.fromFuture(
-      HttpManager.getInstance().report(url, queryParameters))
+          HttpManager.getInstance().report(url, queryParameters))
       .asBroadcastStream();
+}
