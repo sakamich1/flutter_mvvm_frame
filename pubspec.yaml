@@ -1,42 +1,44 @@
-name: flutter_mvvm_frame
-description: Flutter fast-developing frame with MVVM mode
-version: 1.0.4+1
+name: ai_paint
+description: Generate your own anime wallpaper by specified keywords
+version: 1.0.0+1
 environment:
   sdk: '>=2.12.0 <3.0.0'
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-  dio: ^4.0.0
+  dio: ^5.0.2
   shared_preferences: ^2.0.5
   event_bus: ^2.0.0
   rxdart: ^0.27.1
   get: ^4.1.4
-  moor: ^4.3.2
+  drift: ^2.5.0
   sqlite3_flutter_libs: ^0.5.0
   path_provider: ^2.0.1
-  path: ^1.8.0
-  connectivity_plus: ^1.0.1
+  path: ^1.8.2
+  connectivity_plus: ^3.0.3
   fluttertoast: ^8.0.7
   device_info: ^2.0.1
-  permission_handler: ^8.1.4+2
+  permission_handler: ^10.2.0
   package_info: ^2.0.2
   crypto: ^3.0.1
-  webview_flutter: ^2.0.8
-  intl: ^0.17.0
-  r_dart_library: 0.4.0-nullsafety.0
-  json_serializable: ^4.1.2
-  timezone: ^0.7.0
+  webview_flutter: ^4.0.6
+  intl: ^0.18.0
+  r_dart_library: ^0.4.1
+  json_serializable: ^6.6.1
   encrypt: ^5.0.1
+  flutter_screenutil: ^5.7.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.0.2
-  moor_generator: ^4.3.0
+  build_runner: ^2.3.3
+  drift_dev: ^2.5.2
+  
 flutter:
   uses-material-design: true
   assets:
-  - packages/flutter_mvvm_frame/assets/texts/jsons/city.json
+  - packages/ai_paint/assets/texts/jsons/city.json
 flr:
   core_version: 3.2.0
   dartfmt_line_length: 80

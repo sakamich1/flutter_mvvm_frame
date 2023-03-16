@@ -2,8 +2,8 @@ import 'dart:collection';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:convert/convert.dart';
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/utils/log_util.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/utils/log_util.dart';
 
 
 class DataHelper {

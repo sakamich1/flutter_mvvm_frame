@@ -1,6 +1,6 @@
 
-import 'package:flutter_mvvm_frame/module/main/report_service.dart';
-import 'package:flutter_mvvm_frame/utils/sp_utils.dart';
+import 'package:ai_paint/module/main/report_service.dart';
+import 'package:ai_paint/utils/sp_utils.dart';
 import 'package:get/get.dart';
 
 class SharedPreferenceService extends GetxService{

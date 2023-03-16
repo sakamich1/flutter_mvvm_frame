@@ -18,8 +18,8 @@ import 'package:r_dart_library/asset_svg.dart';
 
 /// This `R` class is generated and contains references to static asset resources.
 class R {
-  /// package name: flutter_mvvm_frame
-  static const package = "flutter_mvvm_frame";
+  /// package name: ai_paint
+  static const package = "ai_paint";
 
   /// This `R.image` struct is generated, and contains static references to static non-svg type image asset resources.
   static const image = _R_Image();

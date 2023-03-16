@@ -1,6 +1,6 @@
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/module/main/report_service.dart';
-import 'package:flutter_mvvm_frame/utils/device_info.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/module/main/report_service.dart';
+import 'package:ai_paint/utils/device_info.dart';
 import 'package:get/get.dart';
 
 class ReportUtil {

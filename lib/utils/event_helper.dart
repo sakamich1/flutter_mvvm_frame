@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:event_bus/event_bus.dart';
-import 'package:flutter_mvvm_frame/common/event_data.dart';
+import 'package:ai_paint/common/event_data.dart';
 
 class EventHelper<T> {
   static EventHelper? _instance;

@@ -19,7 +19,7 @@ class AppException implements Exception {
       case DioErrorType.cancel:
         return BadRequestException(-1, "请求取消");
 
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         return BadRequestException(-1, "连接超时");
 
       case DioErrorType.sendTimeout:
@@ -28,7 +28,7 @@ class AppException implements Exception {
       case DioErrorType.receiveTimeout:
         return BadRequestException(-1, "响应超时");
 
-      case DioErrorType.response:
+      case DioErrorType.unknown:
         {
           try {
             int errCode = error.response!.statusCode!;

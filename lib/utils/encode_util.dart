@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:convert/convert.dart';
 import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart';
-import 'package:flutter_mvvm_frame/common/constants.dart';
+import 'package:ai_paint/common/constants.dart';
 
 class EncodeUtil {
   static final Key _aesKey = Key.fromUtf8('zmtq20210512vpro');

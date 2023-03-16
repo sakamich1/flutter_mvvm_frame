@@ -2,11 +2,10 @@ import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info/device_info.dart';
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/module/main/entity/location_entity.dart';
-import 'package:flutter_mvvm_frame/utils/encode_util.dart';
-import 'package:flutter_mvvm_frame/utils/sp_utils.dart';
-import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/utils/encode_util.dart';
+import 'package:ai_paint/utils/sp_utils.dart';
+import 'package:ai_paint/utils/ui_utils.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 
@@ -25,16 +24,7 @@ class DeviceInfoUtil {
     Map<String, dynamic> queryMap = Map();
 
     var packageInfo = await PackageInfo.fromPlatform();
-    Map<String, dynamic>? locationJson =
-        Get.find<SPUtil>().getJSON(SPKeys.KEY_LOCATION_DATA);
-
-    if (locationJson != null) {
-      LocationEntity locationInfo = LocationEntity.fromJson(locationJson);
-      /*queryMap
-        ..[Keys.COMMON_CITY_LATITUDE] = '${locationInfo.latitude}'
-        ..[Keys.COMMON_CITY_LONGITUDE] = '${locationInfo.longitude}';*/
-    }
-
+    
     queryMap
       ..[Keys.COMMON_USER_ID] = ''
       //..[Keys.COMMON_PKG_VERSIONCODE] = packageInfo.version
@@ -64,7 +54,7 @@ class DeviceInfoUtil {
         ..[Keys.COMMON_CHL] = Strings.CHANNEL_ID_ANDROID
         ..[Keys.COMMON_ANDROID_ID] = androidInfo.androidId
         ..[Keys.COMMON_APP_ID] = Strings.APP_ID_ANDROID
-        ..[Keys.COMMON_ZM_ID] = await _getZMId();
+        /*..[Keys.COMMON_ZM_ID] = await _getZMId()*/;
     } else {
       var iosInfo = await getIOSDeviceInfo();
       queryMap
@@ -88,12 +78,12 @@ class DeviceInfoUtil {
     Map<String, dynamic>? locationJson =
     Get.find<SPUtil>().getJSON(SPKeys.KEY_LOCATION_DATA);
 
-    if (locationJson != null) {
+    /*if (locationJson != null) {
       LocationEntity locationInfo = LocationEntity.fromJson(locationJson);
       content
         ..[Keys.REPORT_KEY_LAT] = '${locationInfo.latitude}'
         ..[Keys.REPORT_KEY_LON] = '${locationInfo.longitude}';
-    }
+    }*/
 
     content
       ..[Keys.REPORT_KEY_PACKAGE_NAME] = packageInfo.packageName
@@ -235,28 +225,5 @@ class DeviceInfoUtil {
     }
     return networkStatusCode;
   }
-
-  static Future<String> _getZMId() async {
-    /* if (TextUtils.isEmpty(sZmId)) {
-                String brand = Build.BRAND;
-                String model = Build.MODEL;
-                String serialNum = Build.UNKNOWN;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE)
-                            == PackageManager.PERMISSION_GRANTED) {
-                        serialNum = Build.getSerial();
-                    }
-                } else {
-                    serialNum = Build.SERIAL;
-                }
-                String androidId = getAndroidId(context);
-                sZmId = MD5Util.getStringMD5(brand + model + serialNum + androidId);*/
-    var androidInfo = await getAndroidInfo();
-
-    String serialNum = 'unknown';
-
-    String androidId = androidInfo.androidId;
-    return EncodeUtil.generateMd5(
-        '${androidInfo.brand}${androidInfo.model}$serialNum$androidId');
-  }
+  
 }

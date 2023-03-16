@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:collection';
 import 'package:dio/dio.dart';
-import 'package:flutter_mvvm_frame/utils/log_util.dart';
-import 'package:flutter_mvvm_frame/utils/sp_utils.dart';
+import 'package:ai_paint/utils/log_util.dart';
+import 'package:ai_paint/utils/sp_utils.dart';
 import 'package:get/get.dart' as getX;
 import 'cache.dart';
 import 'connectivity_request_retrier.dart';
@@ -50,7 +50,7 @@ class LogsInterceptor extends InterceptorsWrapper {
       ) {
     // error统一处理
     AppException appException = AppException.create(err);
-    err.error = appException;
+    //err.error = appException;
 
     LogUtil.e('请求异常: ' + err.toString(), tag: tag);
     LogUtil.e('请求异常信息: ' + (err.response?.toString() ?? ""), tag: tag);
@@ -98,7 +98,7 @@ class NoGzipLogInterceptor extends Interceptor {
       ) {
     // error统一处理
     AppException appException = AppException.create(err);
-    err.error = appException;
+    //err.error = appException;
 
     LogUtil.e('请求异常: ' + err.toString(), tag: tag);
     LogUtil.e('请求异常信息: ' + (err.response?.toString() ?? ""), tag: tag);
@@ -238,7 +238,7 @@ class RetryOnConnectionChangeInterceptor extends Interceptor {
   }
 
   bool _shouldRetry(DioError err) {
-    return err.type == DioErrorType.other &&
+    return err.type == DioErrorType.unknown &&
         err.error != null &&
         err.error is SocketException;
   }

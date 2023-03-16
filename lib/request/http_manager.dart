@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/utils/encode_util.dart';
-import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/utils/encode_util.dart';
+import 'package:ai_paint/utils/ui_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'connectivity_request_retrier.dart';
 import '../utils/device_info.dart';
@@ -36,8 +36,10 @@ class HttpManager {
         ..options = BaseOptions(
             //baseUrl: Configurations.base_url,
             //queryParameters: {},
-            connectTimeout: Configurations.connect_time_out,
-            receiveTimeout: Configurations.receive_time_out,
+            connectTimeout:
+                Duration(milliseconds: Configurations.connect_time_out),
+            receiveTimeout:
+                Duration(milliseconds: Configurations.receive_time_out),
             contentType: Headers.contentEncodingHeader,
             responseType: ResponseType.bytes)
         ..interceptors.addAll([_logsInterceptor, _netCacheInterceptor]);

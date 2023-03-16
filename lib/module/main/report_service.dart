@@ -1,6 +1,6 @@
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/request/http_manager.dart';
-import 'package:flutter_mvvm_frame/request/http_result.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/request/http_manager.dart';
+import 'package:ai_paint/request/http_result.dart';
 
 
 class ReportService {

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mvvm_frame/global/screen_manager.dart';
-import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
+import 'package:ai_paint/global/screen_manager.dart';
+import 'package:ai_paint/utils/ui_utils.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 

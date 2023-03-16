@@ -1,4 +1,4 @@
-# flutter_mvvm_frame
+# ai_paint
 
 Flutter fast-developing frame with MVVM mode
 

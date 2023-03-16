@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter_mvvm_frame/common/constants.dart';
-import 'package:flutter_mvvm_frame/utils/ui_utils.dart';
+import 'package:ai_paint/common/constants.dart';
+import 'package:ai_paint/utils/ui_utils.dart';
 
 extension StringExtension on String{
   /// 是否是电话号码

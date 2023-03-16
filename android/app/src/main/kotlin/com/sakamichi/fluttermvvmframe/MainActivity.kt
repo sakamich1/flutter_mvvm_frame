@@ -1,4 +1,4 @@
-package com.sakamichi.flutter_mvvm_frame
+package com.lingxi.aipaint
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

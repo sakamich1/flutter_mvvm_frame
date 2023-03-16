@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm_frame/common/constants.dart';
+import 'package:ai_paint/common/constants.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class UIUtils {

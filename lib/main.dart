@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_mvvm_frame/module/home/home.dart';
-import 'package:flutter_mvvm_frame/request/http_manager.dart';
+import 'package:ai_paint/module/home/home.dart';
+import 'package:ai_paint/request/http_manager.dart';
 import 'package:get/get.dart';
 import 'global/app_theme.dart';
 import 'global/dependencies_module.dart';
